@@ -1,0 +1,20 @@
+Group Name
+----------
+
+The Paint Makers
+
+Members
+-------
+
+Michael Miralles - fsknmike
+Gregory Mitchell - s1rcapalott
+
+Disgnated Submitter
+-------------------
+
+Michael Miralles
+
+Github Repo Link
+----------------
+
+https://github.com/4sknmike/Paint-Application.git
