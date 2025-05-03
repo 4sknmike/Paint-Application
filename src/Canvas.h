@@ -20,9 +20,12 @@ class Canvas : public bobcat::Canvas_ {
 public:
     Canvas(int x, int y, int w, int h);
 
+    Drawable* getSelected() const;
+
     void startScribble();
     void addPointToScribble(float x, float y, float r, float g, float b, int size);
     void endScribble();
+    void selectShape(float x, float y);
 
 
     void addCircle(float x, float y, float radius, float r, float g, float b);
