@@ -4,6 +4,9 @@
 using namespace bobcat;
 using namespace std;
 
+static float lastX = 0.0f;
+static float lastY = 0.0f;
+
 void Application::onCanvasMouseDown(bobcat::Widget* sender, float mx, float my) {
     TOOL tool = toolbar->getTool();
     Color color = colorSelector->getColor();
@@ -34,6 +37,12 @@ void Application::onCanvasMouseDown(bobcat::Widget* sender, float mx, float my) 
         canvas->addPolygon(mx, my, 0.15, color.getR(), color.getG(), color.getB());
         canvas->redraw();
     }
+    else if (tool == MOUSE) {
+        lastX = mx;
+        lastY = my;
+        canvas->selectShape(mx, my);
+        canvas->redraw();
+    }
     else if (tool == CLEAR) {
         canvas->clearAll();
     }
@@ -50,6 +59,20 @@ void Application::onCanvasDrag(bobcat::Widget* sender, float mx, float my) {
     else if (tool == ERASER) {
         canvas->addPointToScribble(mx, my, 1.0, 1.0, 1.0, 14);
         canvas->redraw();
+    }
+    else if (tool == MOUSE) {
+        float dx = mx - lastX;
+        float dy = my - lastY;
+
+        Drawable* selected = canvas->getSelected();
+        if (selected) {
+            selected->move(dx, dy);
+            canvas->redraw();
+       }
+
+       lastX = mx;
+       lastY = my;
+    
     }
 }
 

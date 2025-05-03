@@ -32,6 +32,18 @@ void Canvas::addRectangle(float x, float y, float width, float height, float r, 
 void Canvas::addPolygon(float x, float y, float radius, float r, float g, float b) {
     drawables.push_back(new Polygon(x, y, radius, r, g, b));
 }
+Drawable* Canvas::getSelected() const {
+    return selected;
+}
+void Canvas::selectShape(float x, float y) {
+    for (int i = drawables.size() - 1; i >= 0; --i) {
+        if (drawables[i]->contains(x, y)) {
+            selected = drawables[i];
+            return;
+        }
+    }
+    selected = nullptr;
+}
 void Canvas::clearAll() {
     for (Drawable* d : drawables) {
         delete d;
