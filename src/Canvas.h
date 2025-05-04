@@ -33,6 +33,9 @@ public:
     void addRectangle(float x, float y, float width, float height, float r, float g, float b);
     void addPolygon(float x, float y, float radius, float r, float g, float b);
 
+    void bringToFront();
+    void sendToBack();
+
     void clearAll();
     void render();
 };

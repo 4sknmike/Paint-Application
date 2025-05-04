@@ -36,13 +36,35 @@ Drawable* Canvas::getSelected() const {
     return selected;
 }
 void Canvas::selectShape(float x, float y) {
-    for (int i = drawables.size() - 1; i >= 0; --i) {
+    for (int i = drawables.size() - 1; i >= 0; i--) {
         if (drawables[i]->contains(x, y)) {
             selected = drawables[i];
             return;
         }
     }
     selected = nullptr;
+}
+void Canvas::bringToFront() {
+    if (!selected) return;
+
+    for (unsigned int i = 0; i < drawables.size(); i++) {
+        if (drawables[i] == selected) {
+            drawables.erase(drawables.begin() + i);
+            drawables.push_back(selected);
+            break;
+        }
+    }
+}
+void Canvas::sendToBack() {
+    if (!selected) return;
+
+    for (unsigned int i = 0; i < drawables.size(); i++) {
+        if (drawables[i] == selected) {
+            drawables.erase(drawables.begin() + i);
+            drawables.insert(drawables.begin(), selected);
+            break;
+        }
+    }
 }
 void Canvas::clearAll() {
     for (Drawable* d : drawables) {

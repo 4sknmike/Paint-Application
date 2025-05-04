@@ -57,6 +57,16 @@ void Application::onCanvasMouseDown(bobcat::Widget* sender, float mx, float my) 
             canvas->redraw();
         }
     }
+    else if (tool == FRONT) {
+        canvas->selectShape(mx, my);
+        canvas->bringToFront();
+        canvas->redraw();
+    }
+    else if (tool == BACK) {
+        canvas->selectShape(mx, my);
+        canvas->sendToBack();
+        canvas->redraw();
+    }
     else if (tool == CLEAR) {
         canvas->clearAll();
     }
