@@ -43,6 +43,20 @@ void Application::onCanvasMouseDown(bobcat::Widget* sender, float mx, float my) 
         canvas->selectShape(mx, my);
         canvas->redraw();
     }
+    else if (tool == PLUS) {
+        Drawable* selected = canvas->getSelected();
+        if (selected) {
+            selected->resize(1.25f);
+            canvas->redraw();
+        }
+    }
+    else if (tool == MINUS) {
+        Drawable* selected = canvas->getSelected();
+        if (selected) {
+            selected->resize(0.8f);
+            canvas->redraw();
+        }
+    }
     else if (tool == CLEAR) {
         canvas->clearAll();
     }
