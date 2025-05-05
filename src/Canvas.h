@@ -26,6 +26,8 @@ public:
     void addPointToScribble(float x, float y, float r, float g, float b, int size);
     void endScribble();
     void selectShape(float x, float y);
+    void eraseAt(float x, float y, float radius);
+
 
 
     void addCircle(float x, float y, float radius, float r, float g, float b);

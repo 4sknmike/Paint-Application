@@ -18,6 +18,7 @@ public:
     bool contains(float x, float y) const override;
     void resize(float factor) override;
     void move(float dx, float dy) override;
+    void eraseNear(float x, float y, float radius);
 };
 
 #endif

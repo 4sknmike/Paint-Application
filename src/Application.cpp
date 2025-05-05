@@ -17,9 +17,10 @@ void Application::onCanvasMouseDown(bobcat::Widget* sender, float mx, float my) 
         canvas->redraw();
     }
     else if (tool == ERASER) {
-        canvas->startScribble();
-        canvas->addPointToScribble(mx, my, 1.0, 1.0, 1.0, 14);
+        canvas->eraseAt(mx, my, 0.01f); // adjust radius for precision
         canvas->redraw();
+    }    
+
     }
     else if (tool == CIRCLE) {
         canvas->addCircle(mx, my, 0.1, color.getR(), color.getG(), color.getB());
@@ -81,8 +82,9 @@ void Application::onCanvasDrag(bobcat::Widget* sender, float mx, float my) {
         canvas->redraw();
     }
     else if (tool == ERASER) {
-        canvas->addPointToScribble(mx, my, 1.0, 1.0, 1.0, 14);
+        canvas->eraseAt(mx, my, 0.01f); // match same radius
         canvas->redraw();
+    }    
     }
     else if (tool == MOUSE) {
         float dx = mx - lastX;

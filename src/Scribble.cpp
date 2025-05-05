@@ -44,4 +44,18 @@ void Scribble::move(float dx, float dy) {
         float newY = p->getY() + dy;
         *p = Point(newX, newY, p->getR(), p->getG(), p->getB(), p->getSize());
     }
-}
+
+void Scribble::eraseNear(float x, float y, float radius) {
+    auto it = points.begin();
+    while (it != points.end()) {
+        float dx = x - (*it)->getX();
+        float dy = y - (*it)->getY();
+        if (dx * dx + dy * dy < radius * radius) {
+            delete *it;
+            it = points.erase(it);  // erase returns the next iterator
+        } else {
+            ++it;
+            }
+        }
+    }
+    

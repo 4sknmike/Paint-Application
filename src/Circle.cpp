@@ -48,3 +48,11 @@ void Circle::move(float dx, float dy) {
     x += dx;
     y += dy;
 }
+void Canvas::eraseAt(float x, float y, float radius) {
+    for (Drawable* d : drawables) {
+        Scribble* scribble = dynamic_cast<Scribble*>(d);
+        if (scribble) {
+            scribble->eraseNear(x, y, radius);
+        }
+    }
+}
