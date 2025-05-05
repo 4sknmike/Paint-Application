@@ -7,9 +7,11 @@ using namespace std;
 static float lastX = 0.0f;
 static float lastY = 0.0f;
 
-void Application::onCanvasMouseDown(bobcat::Widget* sender, float mx, float my) {
+void Application::onCanvasMouseUp(bobcat::Widget* sender, float mx, float my) {
     TOOL tool = toolbar->getTool();
-    Color color = colorSelector->getColor();
+    if (tool == PENCIL || tool == ERASER) {
+        canvas->endScribble();
+    }
 
     if (tool == PENCIL) {
         canvas->startScribble();

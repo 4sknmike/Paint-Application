@@ -88,10 +88,24 @@ void Canvas::render() {
     }
 }
 void Canvas::eraseAt(float x, float y, float radius) {
-    for (Drawable* d : drawables) {
-        Scribble* scribble = dynamic_cast<Scribble*>(d);
-        if (scribble) {
+    auto it = drawables.begin();
+    while (it != drawables.end()) {
+        Drawable* d = *it;
+
+        // If it's a Scribble, erase points
+        if (Scribble* scribble = dynamic_cast<Scribble*>(d)) {
             scribble->eraseNear(x, y, radius);
+
+            // If all points are gone, delete scribble itself
+            // (optional: implement scribble->empty() if needed)
+            ++it;
+        }
+        // Otherwise, erase shape if user clicked inside
+        else if (d->contains(x, y)) {
+            delete d;
+            it = drawables.erase(it);
+        } else {
+            ++it;
         }
     }
 }
