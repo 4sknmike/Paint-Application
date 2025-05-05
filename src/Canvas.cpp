@@ -87,3 +87,11 @@ void Canvas::render() {
         currentScribble->draw();
     }
 }
+void Canvas::eraseAt(float x, float y, float radius) {
+    for (Drawable* d : drawables) {
+        Scribble* scribble = dynamic_cast<Scribble*>(d);
+        if (scribble) {
+            scribble->eraseNear(x, y, radius);
+        }
+    }
+}
